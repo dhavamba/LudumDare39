@@ -66,6 +66,7 @@ namespace UITemplate
         {
             SceneManager.LoadScene(0);
             pause.UnPause();
+            inMainMenu = true;
             showPanels.ShowMenu();
         }
 
