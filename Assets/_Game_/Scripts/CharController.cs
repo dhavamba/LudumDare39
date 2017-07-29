@@ -14,6 +14,13 @@ public class CharController : MonoBehaviour
     private float speed;
     private bool isGrounded;
 
+
+    [SerializeField]
+    private float gravityUp;
+    [SerializeField]
+    private float gravityDw;
+
+    private float gravity;
     private Rigidbody2D rb;
 
     [Range(0, 1)]
@@ -27,6 +34,7 @@ public class CharController : MonoBehaviour
     {
         speed = stdspeed;
         rb = GetComponent<Rigidbody2D>();
+        gravity = rb.gravityScale;
     }
 
     private void FixedUpdate()
@@ -34,21 +42,15 @@ public class CharController : MonoBehaviour
         Movement();
         if (isGrounded && Input.GetKeyDown(KeyCode.UpArrow))
         {
+            rb.gravityScale = gravityUp;
             Jump();
         }
         if (!isGrounded)
         {
-            RaycastHit2D hitL = Physics2D.Raycast(transform.position, Vector2.left);
-            RaycastHit2D hitR = Physics2D.Raycast(transform.position, Vector2.right);
-            if(hitL.collider != null)
+            if(rb.velocity.y <= 0)
             {
-                if (Mathf.Abs(hitL.point.x - transform.position.x) <= 1f)
-                {
-                    Vector2 pos = transform.position;
-                    transform.position = pos;
-                }
+                rb.gravityScale = gravityDw;
             }
-
             if (Input.GetKeyDown(KeyCode.UpArrow) && duble)
             {
                 duble = false;
@@ -57,12 +59,21 @@ public class CharController : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "GND")
+        {
+            isGrounded = true;
+            //duble = true;
+        }
+    }
+
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "GND")
         {
             isGrounded = true;
-            duble = true;
+            //duble = true;
         }
     }
 
@@ -120,4 +131,3 @@ public class CharController : MonoBehaviour
 
     }
 }
-
