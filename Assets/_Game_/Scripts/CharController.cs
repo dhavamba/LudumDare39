@@ -6,10 +6,11 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 
 
-public class CharController : MonoBehaviour {
+public class CharController : MonoBehaviour
+{
 
     public float Speed;
-    public bool IsGrounded,Duble;
+    public bool IsGrounded, Duble;
     Rigidbody2D rb;
     public float JumpForce;
     public float Gravity;
@@ -21,15 +22,15 @@ public class CharController : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        transform.Translate(Input.GetAxis("Horizontal") * Time.deltaTime * Speed ,0,0);
-        if(IsGrounded && Input.GetKeyDown(KeyCode.UpArrow))
+        transform.Translate(Input.GetAxis("Horizontal") * Time.deltaTime * Speed, 0, 0);
+        if (IsGrounded && Input.GetKeyDown(KeyCode.UpArrow))
         {
             Jump();
         }
-        if(!IsGrounded)
+        if (!IsGrounded)
         {
             rb.AddForce(Vector2.down * Gravity);
-            if(Input.GetKeyDown(KeyCode.UpArrow) && Duble)
+            if (Input.GetKeyDown(KeyCode.UpArrow) && Duble)
             {
                 Duble = false;
                 DubleJump();
@@ -39,7 +40,7 @@ public class CharController : MonoBehaviour {
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "GND")
+        if (collision.gameObject.tag == "GND")
         {
             IsGrounded = true;
             Duble = true;
@@ -64,4 +65,29 @@ public class CharController : MonoBehaviour {
         Duble = false;
         Jump();
     }
+
+    
+
+    public void Slow()
+    {
+        Speed /= 2;
+        float t = 3f;
+        t -= Time.deltaTime;
+        if(t <= 0)
+        {
+            Speed *= 2;
+        }
+    }
+
+    public void Stun()
+    {
+        Speed *= -1;
+        float t = 3f;
+        t -= Time.deltaTime;
+        if (t <= 0)
+        {
+            Speed *= 2;
+        }
+    }
 }
+

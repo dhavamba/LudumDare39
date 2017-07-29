@@ -22,3 +22,9 @@ MonoBehaviour:
     ID: 0
   - Name: UI
     ID: 0
+  - Name: SlowZone
+    ID: 0
+  - Name: Punte
+    ID: 0
+  - Name: GND
+    ID: 0
