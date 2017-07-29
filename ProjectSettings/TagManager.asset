@@ -7,6 +7,7 @@ TagManager:
   - GND
   - Punte
   - SlowZone
+  - Wall
   layers:
   - Default
   - TransparentFX

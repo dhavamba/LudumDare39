@@ -38,7 +38,17 @@ public class CharController : MonoBehaviour
         }
         if (!isGrounded)
         {
-           
+            RaycastHit2D hitL = Physics2D.Raycast(transform.position, Vector2.left);
+            RaycastHit2D hitR = Physics2D.Raycast(transform.position, Vector2.right);
+            if(hitL.collider != null)
+            {
+                if (Mathf.Abs(hitL.point.x - transform.position.x) <= 1f)
+                {
+                    Vector2 pos = transform.position;
+                    transform.position = pos;
+                }
+            }
+
             if (Input.GetKeyDown(KeyCode.UpArrow) && duble)
             {
                 duble = false;
