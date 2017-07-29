@@ -18,4 +18,15 @@ public class ZoneEventTrigger : MonoBehaviour {
             stmController.setStamina(false);
         }
     }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player") && !isRescueZone)
+        {
+            stmController.setStamina(false);
+        }
+        else if (other.CompareTag("Player") && isRescueZone)
+        {
+            stmController.setStamina(false);
+        }
+    }
 }

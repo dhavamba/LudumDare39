@@ -9,31 +9,32 @@ using UnityEngine;
 public class CharController : MonoBehaviour
 {
 
-    public float Speed;
-    public bool IsGrounded, Duble;
+    public float speed,stdspeed;
+    public bool isGrounded, duble;
     Rigidbody2D rb;
-    public float JumpForce;
-    public float Gravity;
+    public float jumpForce;
+    public float gravity;
 
     private void Start()
     {
+        speed = stdspeed;
         rb = GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate()
     {
-        transform.Translate(Input.GetAxis("Horizontal") * Time.deltaTime * Speed, 0, 0);
-        if (IsGrounded && Input.GetKeyDown(KeyCode.UpArrow))
+        transform.Translate(Input.GetAxis("Horizontal") * Time.deltaTime * speed, 0, 0);
+        if (isGrounded && Input.GetKeyDown(KeyCode.UpArrow))
         {
             Jump();
         }
-        if (!IsGrounded)
+        if (!isGrounded)
         {
-            rb.AddForce(Vector2.down * Gravity);
-            if (Input.GetKeyDown(KeyCode.UpArrow) && Duble)
+            rb.AddForce(Vector2.down * gravity);
+            if (Input.GetKeyDown(KeyCode.UpArrow) && duble)
             {
-                Duble = false;
-                DubleJump();
+                duble = false;
+                dubleJump();
             }
         }
     }
@@ -42,8 +43,8 @@ public class CharController : MonoBehaviour
     {
         if (collision.gameObject.tag == "GND")
         {
-            IsGrounded = true;
-            Duble = true;
+            isGrounded = true;
+            duble = true;
         }
     }
 
@@ -51,43 +52,36 @@ public class CharController : MonoBehaviour
     {
         if (collision.gameObject.tag == "GND")
         {
-            IsGrounded = false;
+            isGrounded = false;
         }
     }
 
     void Jump()
     {
-        rb.AddForce(Vector2.up * JumpForce);
+        rb.AddForce(Vector2.up * jumpForce);
     }
 
-    void DubleJump()
+    void dubleJump()
     {
-        Duble = false;
+        duble = false;
         Jump();
     }
-
     
 
     public void Slow()
     {
-        Speed /= 2;
-        float t = 3f;
-        t -= Time.deltaTime;
-        if(t <= 0)
-        {
-            Speed *= 2;
-        }
+        speed = stdspeed / 2;  
     }
 
     public void Stun()
     {
-        Speed *= -1;
-        float t = 3f;
-        t -= Time.deltaTime;
-        if (t <= 0)
-        {
-            Speed *= 2;
-        }
+        //Stun effect
+    }
+
+    public void ResetSpeed()
+    {
+        speed = stdspeed;
+
     }
 }
 

@@ -8,7 +8,7 @@ public class StaminaController : MonoBehaviour
     public float addStaminaSpeed;
     public float subStaminaSpeed;
 
-    float timer = 1;
+    float timer = 3;
     float timeToRemaining;
 
     float stamina;
@@ -25,10 +25,15 @@ public class StaminaController : MonoBehaviour
         {
             if (!isAddStamina && stamina > 0)
             {
-                stamina -= subStaminaSpeed;
-                Debug.Log("Perdo stamina...  Stamina attuale: " + stamina);
+                if (stamina > 0)
+                {
+                    stamina -= subStaminaSpeed;
+                    Debug.Log("Perdo stamina...  Stamina attuale: " + stamina);
+                }
+                else
+                    stamina = 0;
             }
-            else if(stamina < MAX_STAMINA)
+            if(isAddStamina && stamina < MAX_STAMINA)
             {
                 stamina += addStaminaSpeed;
 
