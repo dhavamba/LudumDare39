@@ -13,10 +13,13 @@ public class StaminaController : MonoBehaviour
 
     float stamina;
     bool isAddStamina = false; //Devo ricaricare stamina?
+
+    CheckPointManager checkPointManager;
     
     void Start()
     {
         stamina = MAX_STAMINA;
+        checkPointManager = GameObject.FindGameObjectWithTag("CheckPointManager").GetComponent<CheckPointManager>();
     }
 
     void Update()
@@ -28,10 +31,13 @@ public class StaminaController : MonoBehaviour
                 if (stamina > 0)
                 {
                     stamina -= subStaminaSpeed;
-                    //Debug.Log("Perdo stamina...  Stamina attuale: " + stamina);
+                    Debug.Log("Perdo stamina...  Stamina attuale: " + stamina);
                 }
                 else
+                {
+                    //Respawno nell'ultimo checkpoint
                     stamina = 0;
+                }
             }
             if(isAddStamina && stamina < MAX_STAMINA)
             {
@@ -48,10 +54,21 @@ public class StaminaController : MonoBehaviour
         }
 
         timeToRemaining -= Time.deltaTime;
+        if (stamina <= 0)
+        {
+            //Respawno nell'ultimo checkpoint
+            Respawn();
+        }
     }
 
     public void setStamina(bool value)//Se passo true ricarico, se passo false scarico
     {
         isAddStamina = value;
+    }
+
+    public void Respawn()
+    {
+        stamina = MAX_STAMINA;
+        this.transform.position = checkPointManager.getCheckPoint().position;
     }
 }
