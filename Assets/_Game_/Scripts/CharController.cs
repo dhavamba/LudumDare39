@@ -8,29 +8,41 @@ using UnityEngine;
 
 public class CharController : MonoBehaviour
 {
+    [Range(0, 1)]
+    [SerializeField]
+    private float speed;
+    private float stdspeed;
+    private bool isGrounded;
 
-    public float speed,stdspeed;
-    public bool isGrounded, duble;
-    Rigidbody2D rb;
-    public float jumpForce;
-    public float gravity;
+    private Rigidbody2D rb;
+
+    [Range(0, 1)]
+    [SerializeField]
+    private float jumpForce;
+
+    [Range(0, 1)]
+    [SerializeField]
+    private float gravity;
+
+    [SerializeField]
+    private bool duble;
 
     private void Start()
     {
-        speed = stdspeed;
+        stdspeed = speed;
         rb = GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate()
     {
-        transform.Translate(Input.GetAxis("Horizontal") * Time.deltaTime * speed, 0, 0);
+        transform.Translate(Input.GetAxis("Horizontal") * Time.fixedDeltaTime * speed * 80, 0, 0);
         if (isGrounded && Input.GetKeyDown(KeyCode.UpArrow))
         {
             Jump();
         }
         if (!isGrounded)
         {
-            rb.AddForce(Vector2.down * gravity);
+            rb.AddForce(Vector2.down * gravity * 100);
             if (Input.GetKeyDown(KeyCode.UpArrow) && duble)
             {
                 duble = false;
@@ -58,7 +70,7 @@ public class CharController : MonoBehaviour
 
     void Jump()
     {
-        rb.AddForce(Vector2.up * jumpForce);
+        rb.AddForce(Vector2.up * jumpForce * 1000);
     }
 
     void dubleJump()
