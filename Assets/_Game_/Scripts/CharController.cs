@@ -8,17 +8,19 @@ using UnityEngine;
 
 public class CharController : MonoBehaviour
 {
-    [Range(0, 3)]
-    [SerializeField]
+    [SerializeField] [Range(0, 1)]
     private float stdspeed;
+
+    [SerializeField]
+    [Range(0, 1)]
+    private float gravityUp;
+    [SerializeField]
+    [Range(0, 1)]
+    private float gravityDw;
+
     private float speed;
     private bool isGrounded;
 
-
-    [SerializeField]
-    private float gravityUp;
-    [SerializeField]
-    private float gravityDw;
 
     private float gravity;
     private Rigidbody2D rb;
@@ -27,34 +29,33 @@ public class CharController : MonoBehaviour
     [SerializeField]
     private float jumpForce;
 
-    [SerializeField]
-    private bool duble;
-
-    private void Start()
+    private void Awake()
     {
         speed = stdspeed;
         rb = GetComponent<Rigidbody2D>();
         gravity = rb.gravityScale;
     }
 
+    private void Update()
+    {
+        if (isGrounded)
+        {
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                rb.gravityScale = gravityUp;
+                Jump();
+            }
+        }
+    }
+
     private void FixedUpdate()
     {
         Movement();
-        if (isGrounded && Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            rb.gravityScale = gravityUp;
-            Jump();
-        }
         if (!isGrounded)
         {
             if(rb.velocity.y <= 0)
             {
                 rb.gravityScale = gravityDw;
-            }
-            if (Input.GetKeyDown(KeyCode.UpArrow) && duble)
-            {
-                duble = false;
-                dubleJump();
             }
         }
     }
@@ -64,7 +65,6 @@ public class CharController : MonoBehaviour
         if (collision.gameObject.tag == "GND")
         {
             isGrounded = true;
-            //duble = true;
         }
     }
 
@@ -73,7 +73,6 @@ public class CharController : MonoBehaviour
         if (collision.gameObject.tag == "GND")
         {
             isGrounded = true;
-            //duble = true;
         }
     }
 
@@ -88,7 +87,7 @@ public class CharController : MonoBehaviour
     void Movement()
     {
         float h = Input.GetAxis("Horizontal");
-        Vector2 velocity = new Vector2(Vector2.right.x * speed  * h, rb.velocity.y);
+        Vector2 velocity = new Vector2(Vector2.right.x * speed * h * Time.fixedDeltaTime * 300, rb.velocity.y);
 
         rb.velocity = velocity;
 
@@ -107,13 +106,6 @@ public class CharController : MonoBehaviour
     {
         rb.AddForce(Vector2.up * jumpForce * 1000);
     }
-
-    void dubleJump()
-    {
-        duble = false;
-        Jump();
-    }
-    
 
     public void Slow()
     {
