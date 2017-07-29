@@ -128,10 +128,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94288f9c618ec104fa058b7fa83fa0f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: Slow
-  Timer: 0
-  MaxTime: 0
-  Speed: 0
+  type: Slow
+  timer: 0
+  maxTime: 0
+  speed: 0
 --- !u!212 &212757801772676684
 SpriteRenderer:
   m_ObjectHideFlags: 1
