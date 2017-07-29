@@ -8,10 +8,10 @@ using UnityEngine;
 
 public class CharController : MonoBehaviour
 {
-    [Range(0, 1)]
+    [Range(0, 3)]
     [SerializeField]
-    private float speed;
     private float stdspeed;
+    private float speed;
     private bool isGrounded;
 
     private Rigidbody2D rb;
@@ -20,29 +20,25 @@ public class CharController : MonoBehaviour
     [SerializeField]
     private float jumpForce;
 
-    [Range(0, 1)]
-    [SerializeField]
-    private float gravity;
-
     [SerializeField]
     private bool duble;
 
     private void Start()
     {
-        stdspeed = speed;
+        speed = stdspeed;
         rb = GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate()
     {
-        transform.Translate(Input.GetAxis("Horizontal") * Time.fixedDeltaTime * speed * 80, 0, 0);
+        Movement();
         if (isGrounded && Input.GetKeyDown(KeyCode.UpArrow))
         {
             Jump();
         }
         if (!isGrounded)
         {
-            rb.AddForce(Vector2.down * gravity * 100);
+           
             if (Input.GetKeyDown(KeyCode.UpArrow) && duble)
             {
                 duble = false;
@@ -66,6 +62,24 @@ public class CharController : MonoBehaviour
         {
             isGrounded = false;
         }
+    }
+
+    void Movement()
+    {
+        float h = Input.GetAxis("Horizontal");
+        Vector2 velocity = new Vector2(Vector2.right.x * speed  * h, rb.velocity.y);
+
+        rb.velocity = velocity;
+
+        if (velocity.x < 0)
+        {
+            rb.transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else
+        {
+            rb.transform.localScale = new Vector3(1, 1, 1);
+        }
+
     }
 
     void Jump()

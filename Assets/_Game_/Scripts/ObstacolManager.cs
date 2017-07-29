@@ -42,6 +42,7 @@ public class ObstacolManager : MonoBehaviour {
                 HorizontalMove();
                 break;
         }
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
