@@ -28,7 +28,7 @@ public class StaminaController : MonoBehaviour
                 if (stamina > 0)
                 {
                     stamina -= subStaminaSpeed;
-                    Debug.Log("Perdo stamina...  Stamina attuale: " + stamina);
+                    //Debug.Log("Perdo stamina...  Stamina attuale: " + stamina);
                 }
                 else
                     stamina = 0;
