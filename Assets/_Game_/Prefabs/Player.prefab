@@ -101,6 +101,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stdspeed: 3
+  gravityUp: 1
+  gravityDw: 0.5
   jumpForce: 0.3
   duble: 0
 --- !u!114 &114321665372342488
