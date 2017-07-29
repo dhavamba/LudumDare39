@@ -23,9 +23,10 @@ GameObject:
   - component: {fileID: 61605122915819810}
   - component: {fileID: 50722215749052242}
   - component: {fileID: 114127671335612338}
+  - component: {fileID: 114321665372342488}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36,8 +37,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1331529556918214}
-  m_LocalRotation: {x: 0, y: 0, z: 0.000017775092, w: 1}
-  m_LocalPosition: {x: 1.2889597, y: 0.014722871, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -53,16 +54,16 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 0.5
+  m_UseAutoMass: 1
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &61605122915819810
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -99,11 +100,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d31c596594e579c4282bed20402a9054, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 3
-  IsGrounded: 1
-  Duble: 1
-  JumpForce: 200
-  Gravity: 10
+  stdspeed: 3
+  jumpForce: 0.2
+  duble: 0
+--- !u!114 &114321665372342488
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1331529556918214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89525a06d46f3ad48a78f4c7f786027b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MAX_STAMINA: 100
+  addStaminaSpeed: 2.5
+  subStaminaSpeed: 2.5
 --- !u!212 &212264376365975112
 SpriteRenderer:
   m_ObjectHideFlags: 1
