@@ -740,7 +740,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   withTrigger: 0
   timer: 0
-  time: 0
+  time: 1
 --- !u!1 &924992551
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,6 +24,7 @@ public class CharController : MonoBehaviour
 
     [SerializeField]
     [Range(0, 1)]
+    private float time;
     private float timer;
 
     private float gravity;
@@ -38,6 +39,7 @@ public class CharController : MonoBehaviour
         speed = stdspeed;
         rb = GetComponent<Rigidbody2D>();
         gravity = rb.gravityScale;
+        timer = time * 10;
     }
 
     private void Update()
@@ -57,6 +59,7 @@ public class CharController : MonoBehaviour
     {
         if (!stunned)
         {
+
             Movement();
             if (!isGrounded)
             {
@@ -68,9 +71,14 @@ public class CharController : MonoBehaviour
         }
         else
         {
+            rb.velocity = new Vector2(0, 0);
             timer -= Time.fixedDeltaTime;
             if (timer <= 0)
+            {
                 stunned = false;
+                timer = time * 10;
+                
+            }
         }
     }
 
@@ -128,6 +136,7 @@ public class CharController : MonoBehaviour
 
     public void Stun()
     {
+        
         stunned = true;
     }
 
