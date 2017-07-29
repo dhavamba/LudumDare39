@@ -18,6 +18,7 @@ public class GhostObject : MonoBehaviour {
     private void Start()
     {
         time *= 10;
+        timer = time;
     }
 
     void Update()
@@ -25,7 +26,7 @@ public class GhostObject : MonoBehaviour {
         if (!withTrigger)
         {
             timer -= Time.deltaTime;
-            if (timer < 0)
+            if (timer <= 0)
             {
                 if (isActive)
                 {
@@ -35,6 +36,8 @@ public class GhostObject : MonoBehaviour {
                 {
                     Active();
                 }
+                isActive = !isActive;
+                timer = time * 10;
             }
 
         }
