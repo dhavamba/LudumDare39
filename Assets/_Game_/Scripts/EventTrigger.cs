@@ -65,10 +65,6 @@ public class EventTrigger : MonoBehaviour {
         {
             isOnTrigger = false;
             isActivated = false;
-            if(evento.ToString().Equals(("OggettoFantasma")))
-            {
-                manager.runEvent(evento.ToString(), objectToActivate);
-            }
         }
     }
 
