@@ -5,18 +5,21 @@ using UnityEngine;
 public class EventTrigger : MonoBehaviour {
 
     //public typesOfEvents typeOfEvent;
-    public EventManager manager;
+    EventManager manager;
     public GameObject objectToActivate;
-    
+    public bool interagibile = false;
+
     public enum TypesOfEvent
     {
-        Porta, Stampa
+        Porta, OggettoFantasma
     };
 
     public TypesOfEvent evento;
 
     bool isOnTrigger = false;
     bool isPressed = false;
+    bool isActivated = false;
+    
 
     float timer = .5f;
     float timeToRemaing;
@@ -32,12 +35,19 @@ public class EventTrigger : MonoBehaviour {
         {
             isPressed = false;
         }
-        if(!isPressed && isOnTrigger && Input.GetKeyDown(KeyCode.E))
+        if(!isPressed && isOnTrigger && Input.GetKeyDown(KeyCode.E) && interagibile)
         {
             manager.runEvent(evento.ToString(), objectToActivate);
             isPressed = true;
             timeToRemaing = timer;
         }
+
+        if(!interagibile && isOnTrigger && !isActivated)
+        {
+            manager.runEvent(evento.ToString(), objectToActivate);
+            isActivated = true;
+        }
+
         timeToRemaing -= Time.fixedDeltaTime;
     }
 
@@ -54,6 +64,11 @@ public class EventTrigger : MonoBehaviour {
         if (other.CompareTag("Player"))
         {
             isOnTrigger = false;
+            isActivated = false;
+            if(evento.ToString().Equals(("OggettoFantasma")))
+            {
+                manager.runEvent(evento.ToString(), objectToActivate);
+            }
         }
     }
 

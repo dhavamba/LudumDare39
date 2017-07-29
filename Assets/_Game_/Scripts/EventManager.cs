@@ -14,6 +14,10 @@ public class EventManager : MonoBehaviour {
             case "Porta":
                 Door(activeObject.GetComponent<Door>());
                 break;
+            case "OggettoFantasma":
+                GhostObject(activeObject.GetComponent<GhostObject>());
+                break;
+
         }
 
     }
@@ -26,5 +30,10 @@ public class EventManager : MonoBehaviour {
     public void Door(Door activeDoor)
     {
         activeDoor.Use();
+    }
+
+    public void GhostObject(GhostObject activeGhostObj)
+    {
+        activeGhostObj.Use();
     }
 }
