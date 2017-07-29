@@ -20,7 +20,11 @@ public class CharController : MonoBehaviour
 
     private float speed;
     private bool isGrounded;
+    private bool stunned;
 
+    [SerializeField]
+    [Range(0, 1)]
+    private float timer;
 
     private float gravity;
     private Rigidbody2D rb;
@@ -40,6 +44,7 @@ public class CharController : MonoBehaviour
     {
         if (isGrounded)
         {
+            rb.gravityScale = gravity;
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 rb.gravityScale = gravityUp;
@@ -50,13 +55,22 @@ public class CharController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Movement();
-        if (!isGrounded)
+        if (!stunned)
         {
-            if(rb.velocity.y <= 0)
+            Movement();
+            if (!isGrounded)
             {
-                rb.gravityScale = gravityDw;
+                if (rb.velocity.y <= 0)
+                {
+                    rb.gravityScale = gravityDw;
+                }
             }
+        }
+        else
+        {
+            timer -= Time.fixedDeltaTime;
+            if (timer <= 0)
+                stunned = false;
         }
     }
 
@@ -114,12 +128,11 @@ public class CharController : MonoBehaviour
 
     public void Stun()
     {
-        //Stun effect
+        stunned = true;
     }
 
     public void ResetSpeed()
     {
         speed = stdspeed;
-
     }
 }
