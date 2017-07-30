@@ -7,7 +7,12 @@ using UnityEngine;
 
 public class ObstacolManager : MonoBehaviour {
 
-    public string type;
+    public enum typeOfObstacles
+    {
+        Slow,Stun
+    };
+
+    public typeOfObstacles type;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -15,11 +20,11 @@ public class ObstacolManager : MonoBehaviour {
         {
             switch (type)
             {
-                case "Slow":
+                case typeOfObstacles.Slow:
                     collision.gameObject.GetComponent<CharController>().Slow();
                     break;
 
-                case "Stun":
+                case typeOfObstacles.Stun:
                     collision.gameObject.GetComponent<CharController>().Stun();
                     break;
             }

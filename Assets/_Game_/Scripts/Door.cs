@@ -21,11 +21,13 @@ public class Door : MonoBehaviour {
 
     public void Open()
     {
+        this.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 3);
         Debug.Log("Apro porta");
     }
 
     public void Close()
     {
+        this.transform.position = new Vector2(this.transform.position.x, this.transform.position.y - 3);
         Debug.Log("Chiudo porta");
     }
 }
