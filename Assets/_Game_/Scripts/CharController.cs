@@ -98,7 +98,7 @@ public class CharController : MonoBehaviour
             {
                 stunned = false;
                 timer = timeStunned * 10;
-                
+                anim.SetBool("Stun", false);
             }
         }
     }
@@ -139,6 +139,7 @@ public class CharController : MonoBehaviour
         float input = GetInputMovement();
         if (isGrounded && input != 0 && !aSrc.isPlaying)
         {
+
             anim.SetBool("Caduta", false);
             anim.SetBool("Salto", false);
             anim.SetBool("Walk", true);
@@ -185,6 +186,7 @@ public class CharController : MonoBehaviour
     public void Stun()
     {
         transform.Translate(-1f, 0, 0);
+        anim.SetBool("Stun", true);
         stunned = true;
     }
 
