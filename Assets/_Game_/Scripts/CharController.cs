@@ -72,7 +72,8 @@ public class CharController : MonoBehaviour
         }
         else
         {
-            rb.velocity = Vector2.zero;
+            Vector2 sp = new Vector2(0, rb.velocity.y);
+            rb.velocity = sp;
             timer -= Time.fixedDeltaTime;
             if (timer <= 0)
             {
