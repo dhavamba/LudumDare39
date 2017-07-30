@@ -556,28 +556,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &649424265 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1331529556918214, guid: 95cdd28292436494298924951fe73355,
-    type: 2}
-  m_PrefabInternal: {fileID: 1503022525}
---- !u!95 &649424272
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 649424265}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 65e339e0fb632cc409880aca0a6fa80e, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1001 &885702294
 Prefab:
   m_ObjectHideFlags: 0
@@ -1018,45 +996,6 @@ Prefab:
     - target: {fileID: 4839029905227442, guid: 95cdd28292436494298924951fe73355, type: 2}
       propertyPath: m_RootOrder
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 212264376365975112, guid: 95cdd28292436494298924951fe73355,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 5edd7293c33b3d440bb1191df287e622,
-        type: 3}
-    - target: {fileID: 4839029905227442, guid: 95cdd28292436494298924951fe73355, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4839029905227442, guid: 95cdd28292436494298924951fe73355, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 61605122915819810, guid: 95cdd28292436494298924951fe73355,
-        type: 2}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.75900006
-      objectReference: {fileID: 0}
-    - target: {fileID: 61605122915819810, guid: 95cdd28292436494298924951fe73355,
-        type: 2}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 1.7540002
-      objectReference: {fileID: 0}
-    - target: {fileID: 50722215749052242, guid: 95cdd28292436494298924951fe73355,
-        type: 2}
-      propertyPath: m_Mass
-      value: 1.4399999
-      objectReference: {fileID: 0}
-    - target: {fileID: 61605122915819810, guid: 95cdd28292436494298924951fe73355,
-        type: 2}
-      propertyPath: m_Size.x
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 61605122915819810, guid: 95cdd28292436494298924951fe73355,
-        type: 2}
-      propertyPath: m_Size.y
-      value: 1.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 95cdd28292436494298924951fe73355, type: 2}
