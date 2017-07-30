@@ -7,7 +7,7 @@ namespace UITemplate
     {
         [SerializeField]
         private bool allowDuplicate;
-        public bool isFirst;
+        private bool isFirst;
 
         private void Awake()
         {

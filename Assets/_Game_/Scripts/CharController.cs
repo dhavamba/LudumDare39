@@ -11,27 +11,23 @@ public class CharController : MonoBehaviour
     [SerializeField] [Range(0, 1)]
     private float stdspeed;
 
-    [SerializeField]
-    [Range(0, 1)]
+    [SerializeField] [Range(0, 1)]
     private float gravityUp;
-    [SerializeField]
-    [Range(0, 1)]
+    [SerializeField] [Range(0, 1)]
     private float gravityDw;
+    [SerializeField] [Range(0, 1)]
+    private float timeStunned;
 
     private float speed;
     private bool isGrounded;
     private bool stunned;
 
-    [SerializeField]
-    [Range(0, 1)]
-    private float time;
     private float timer;
 
     private float gravity;
     private Rigidbody2D rb;
 
-    [Range(0, 1)]
-    [SerializeField]
+    [Range(0, 1)] [SerializeField]
     private float jumpForce;
 
     private void Awake()
@@ -39,7 +35,12 @@ public class CharController : MonoBehaviour
         speed = stdspeed;
         rb = GetComponent<Rigidbody2D>();
         gravity = rb.gravityScale;
-        timer = time * 10;
+        timer = timeStunned * 10;
+    }
+
+    private bool GetInputJump()
+    {
+        return InputComand.Instance<InputComand>().Jump();
     }
 
     private void Update()
@@ -47,7 +48,7 @@ public class CharController : MonoBehaviour
         if (isGrounded)
         {
             rb.gravityScale = gravity;
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (GetInputJump())
             {
                 rb.gravityScale = gravityUp;
                 Jump();
@@ -59,7 +60,6 @@ public class CharController : MonoBehaviour
     {
         if (!stunned)
         {
-
             Movement();
             if (!isGrounded)
             {
@@ -76,7 +76,7 @@ public class CharController : MonoBehaviour
             if (timer <= 0)
             {
                 stunned = false;
-                timer = time * 10;
+                timer = timeStunned * 10;
                 
             }
         }
@@ -106,10 +106,15 @@ public class CharController : MonoBehaviour
         }
     }
 
+    private float GetInputMovement()
+    {
+        return InputComand.Instance<InputComand>().Movement();
+    }
+
     void Movement()
     {
-        float h = Input.GetAxis("Horizontal");
-        Vector2 velocity = new Vector2(Vector2.right.x * speed * h * Time.fixedDeltaTime * 300, rb.velocity.y);
+        float input = GetInputMovement();
+        Vector2 velocity = new Vector2(Vector2.right.x * speed * input * Time.fixedDeltaTime * 300, rb.velocity.y);
 
         rb.velocity = velocity;
 
