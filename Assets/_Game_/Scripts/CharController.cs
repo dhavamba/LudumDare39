@@ -48,12 +48,16 @@ public class CharController : MonoBehaviour
         if (isGrounded)
         {
             rb.gravityScale = gravity;
-            //if (GetInputJump())
-            if (Input.GetAxis("Vertical") > 0)
+            if (GetInputJump())
             {
                 rb.gravityScale = gravityUp;
                 Jump();
             }
+            /*
+            if (Input.GetAxis("Vertical") > 0)
+            {
+            }
+            */
         }
     }
 
@@ -110,8 +114,8 @@ public class CharController : MonoBehaviour
 
     private float GetInputMovement()
     {
-        //return InputComand.Instance<InputComand>().Movement();
-        return Input.GetAxis("Horizontal");
+        return InputComand.Instance<InputComand>().Movement();
+        //return Input.GetAxis("Horizontal");
     }
 
     void Movement()
