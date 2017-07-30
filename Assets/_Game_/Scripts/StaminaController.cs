@@ -59,7 +59,7 @@ public class StaminaController : MonoBehaviour
         if (stamina <= 0)
         {
             //Respawno nell'ultimo checkpoint
-            Respawn();
+           // Respawn();
         }
     }
 

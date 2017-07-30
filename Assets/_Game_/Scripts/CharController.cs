@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(BoxCollider2D))]
 
 
@@ -30,12 +31,17 @@ public class CharController : MonoBehaviour
     [Range(0, 1)] [SerializeField]
     private float jumpForce;
 
+    private AudioSource aSrc;
+
+    public AudioClip passi, jetpack;
+
     private void Awake()
     {
         speed = stdspeed;
         rb = GetComponent<Rigidbody2D>();
         gravity = rb.gravityScale;
         timer = timeStunned * 10;
+        aSrc = GetComponent<AudioSource>();
     }
 
     private bool GetInputJump()
@@ -70,6 +76,8 @@ public class CharController : MonoBehaviour
             {
                 if (rb.velocity.y <= 0)
                 {
+                    aSrc.clip = jetpack;
+                    aSrc.Play();
                     rb.gravityScale = gravityDw;
                 }
             }
@@ -120,7 +128,17 @@ public class CharController : MonoBehaviour
 
     void Movement()
     {
+       
         float input = GetInputMovement();
+        if (isGrounded && input != 0 && !aSrc.isPlaying)
+        {
+            aSrc.clip = passi;
+            aSrc.Play();
+        }
+        else if(!isGrounded ||input == 0)
+        {
+            aSrc.Stop();
+        }
         Vector2 velocity = new Vector2(Vector2.right.x * speed * input * Time.fixedDeltaTime * 300, rb.velocity.y);
 
         rb.velocity = velocity;
@@ -138,8 +156,11 @@ public class CharController : MonoBehaviour
 
     void Jump()
     {
-        if(!stunned)
+        if (!stunned)
+        {
+            
             rb.AddForce(Vector2.up * jumpForce * 1000);
+        }
     }
 
     public void Slow()

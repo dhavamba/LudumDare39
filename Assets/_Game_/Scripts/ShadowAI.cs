@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
+
 public class ShadowAI : MonoBehaviour {
 
     StaminaController stmController;
@@ -13,15 +15,25 @@ public class ShadowAI : MonoBehaviour {
     [Range(0,1)]
     public float speed;
 
+    public AudioClip[] voices;
+    public AudioClip violin;
+
+    public AudioSource aSrcVoice, aSrcViolin;
+
+    public float timer;
+
     Vector2 positionToReach;
 
     void Start()
     {
+        aSrcVoice = GetComponent<AudioSource>();
+        aSrcViolin = transform.Find("Violino").gameObject.GetComponent<AudioSource>();
         stmController = GameObject.FindGameObjectWithTag("Player").GetComponent<StaminaController>();
         playerPosition = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         myTransform = this.transform;
         rb = GetComponent<Rigidbody2D>();
         positionToReach = myTransform.position;
+        timer = 2f;
     }
 
     void Update()
@@ -35,6 +47,32 @@ public class ShadowAI : MonoBehaviour {
             RefreshOffset();
             RefreshLocation();
         }
+
+        if(stmController.getStamina() < 10)
+        {
+            if (!aSrcViolin.isPlaying)
+            {
+                aSrcViolin.clip = violin;
+                aSrcViolin.Play();
+            }
+        }
+        else
+        {
+            aSrcViolin.Stop();
+        }
+         
+        if (!aSrcVoice.isPlaying)
+        { 
+            timer -= Time.deltaTime;
+            if (timer < 0)
+            {
+                int x = Random.Range(0, 4);
+                aSrcVoice.clip = voices[x];
+                aSrcVoice.Play();
+                timer = Random.Range(0, 11);
+            }
+        }
+
     }
 
     void RefreshOffset()
@@ -45,10 +83,10 @@ public class ShadowAI : MonoBehaviour {
             ResetShadow();
         }
 
-        if(playerPosition.position.x-myTransform.position.x >minOffset)
+        /*if(playerPosition.position.x - myTransform.position.x > minOffset)
         {
             ResetShadow();
-        }
+        }*/
     }
 
     void RefreshLocation()
@@ -58,7 +96,7 @@ public class ShadowAI : MonoBehaviour {
 
     public void ResetShadow()
     {
-        myTransform.position = new Vector2(playerPosition.position.x - minOffset, playerPosition.position.y);
-        positionToReach = myTransform.position;
+        positionToReach = new Vector2(playerPosition.position.x - absoluteOffset, playerPosition.position.y);
+        
     }
 }
