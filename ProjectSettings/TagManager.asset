@@ -10,6 +10,7 @@ TagManager:
   - Wall
   - EventManager
   - CheckPointManager
+  - Shadow
   layers:
   - Default
   - TransparentFX

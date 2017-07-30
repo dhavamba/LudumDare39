@@ -7,6 +7,7 @@ public class StaminaController : MonoBehaviour
     public float MAX_STAMINA;
     public float addStaminaSpeed;
     public float subStaminaSpeed;
+    ShadowAI shadow;
 
     float timer = 3;
     float timeToRemaining;
@@ -20,6 +21,7 @@ public class StaminaController : MonoBehaviour
     {
         stamina = MAX_STAMINA;
         checkPointManager = GameObject.FindGameObjectWithTag("CheckPointManager").GetComponent<CheckPointManager>();
+        shadow = GameObject.FindGameObjectWithTag("Shadow").GetComponent<ShadowAI>();
     }
 
     void Update()
@@ -66,9 +68,16 @@ public class StaminaController : MonoBehaviour
         isAddStamina = value;
     }
 
+    public float getStamina()
+    {
+        return stamina;
+    }
+
     public void Respawn()
     {
         stamina = MAX_STAMINA;
         this.transform.position = checkPointManager.getCheckPoint().position;
+        timeToRemaining = timer;
+        shadow.ResetShadow();
     }
 }
