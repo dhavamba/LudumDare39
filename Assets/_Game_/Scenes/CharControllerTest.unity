@@ -783,7 +783,7 @@ Prefab:
     - target: {fileID: 114127671335612338, guid: 95cdd28292436494298924951fe73355,
         type: 2}
       propertyPath: jumpForce
-      value: 0.1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 114127671335612338, guid: 95cdd28292436494298924951fe73355,
         type: 2}
