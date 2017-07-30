@@ -48,7 +48,8 @@ public class CharController : MonoBehaviour
         if (isGrounded)
         {
             rb.gravityScale = gravity;
-            if (GetInputJump())
+            //if (GetInputJump())
+            if (Input.GetAxis("Vertical") > 0)
             {
                 rb.gravityScale = gravityUp;
                 Jump();
@@ -71,7 +72,7 @@ public class CharController : MonoBehaviour
         }
         else
         {
-            rb.velocity = new Vector2(0, 0);
+            rb.velocity = Vector2.zero;
             timer -= Time.fixedDeltaTime;
             if (timer <= 0)
             {
@@ -108,7 +109,8 @@ public class CharController : MonoBehaviour
 
     private float GetInputMovement()
     {
-        return InputComand.Instance<InputComand>().Movement();
+        //return InputComand.Instance<InputComand>().Movement();
+        return Input.GetAxis("Horizontal");
     }
 
     void Movement()
@@ -131,7 +133,8 @@ public class CharController : MonoBehaviour
 
     void Jump()
     {
-        rb.AddForce(Vector2.up * jumpForce * 1000);
+        if(!stunned)
+            rb.AddForce(Vector2.up * jumpForce * 1000);
     }
 
     public void Slow()
@@ -141,7 +144,7 @@ public class CharController : MonoBehaviour
 
     public void Stun()
     {
-        
+        transform.Translate(-1f, 0, 0);
         stunned = true;
     }
 
