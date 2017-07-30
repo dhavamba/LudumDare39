@@ -75,8 +75,9 @@ public class StaminaController : MonoBehaviour
 
     public void Respawn()
     {
-        stamina = MAX_STAMINA;
+        
         this.transform.position = checkPointManager.getCheckPoint().position;
+        stamina = MAX_STAMINA;
         timeToRemaining = timer;
         shadow.ResetShadow();
     }

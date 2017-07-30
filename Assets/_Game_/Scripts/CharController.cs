@@ -33,6 +33,8 @@ public class CharController : MonoBehaviour
 
     private AudioSource aSrc;
 
+    private Animator anim;
+
     public AudioClip passi, jetpack;
 
     private void Awake()
@@ -42,6 +44,7 @@ public class CharController : MonoBehaviour
         gravity = rb.gravityScale;
         timer = timeStunned * 10;
         aSrc = GetComponent<AudioSource>();
+        anim = GetComponent<Animator>();
     }
 
     private bool GetInputJump()
@@ -76,6 +79,9 @@ public class CharController : MonoBehaviour
             {
                 if (rb.velocity.y <= 0)
                 {
+                    anim.SetBool("Caduta", true);
+                    anim.SetBool("Salto", false);
+                    anim.SetBool("Walk", false);
                     aSrc.clip = jetpack;
                     aSrc.Play();
                     rb.gravityScale = gravityDw;
@@ -84,6 +90,7 @@ public class CharController : MonoBehaviour
         }
         else
         {
+            
             Vector2 sp = new Vector2(0, rb.velocity.y);
             rb.velocity = sp;
             timer -= Time.fixedDeltaTime;
@@ -132,12 +139,17 @@ public class CharController : MonoBehaviour
         float input = GetInputMovement();
         if (isGrounded && input != 0 && !aSrc.isPlaying)
         {
+            anim.SetBool("Caduta", false);
+            anim.SetBool("Salto", false);
+            anim.SetBool("Walk", true);
             aSrc.clip = passi;
             aSrc.Play();
         }
-        else if(!isGrounded ||input == 0)
+        if(isGrounded && input == 0)
         {
-            aSrc.Stop();
+            anim.SetBool("Caduta", false);
+            anim.SetBool("Salto", false);
+            anim.SetBool("Walk", false);
         }
         Vector2 velocity = new Vector2(Vector2.right.x * speed * input * Time.fixedDeltaTime * 300, rb.velocity.y);
 
@@ -147,7 +159,7 @@ public class CharController : MonoBehaviour
         {
             rb.transform.localScale = new Vector3(-1, 1, 1);
         }
-        else
+        else if(velocity.x > 0)
         {
             rb.transform.localScale = new Vector3(1, 1, 1);
         }
@@ -158,7 +170,9 @@ public class CharController : MonoBehaviour
     {
         if (!stunned)
         {
-            
+            anim.SetBool("Caduta", false);
+            anim.SetBool("Salto", true);
+            anim.SetBool("Walk", false);
             rb.AddForce(Vector2.up * jumpForce * 1000);
         }
     }

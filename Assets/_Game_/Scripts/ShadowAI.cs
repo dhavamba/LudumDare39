@@ -96,7 +96,7 @@ public class ShadowAI : MonoBehaviour {
 
     public void ResetShadow()
     {
-        positionToReach = new Vector2(playerPosition.position.x - absoluteOffset, playerPosition.position.y);
+        positionToReach = new Vector2(playerPosition.position.x - 10, playerPosition.position.y);
         
     }
 }
