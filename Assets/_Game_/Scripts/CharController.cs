@@ -122,7 +122,7 @@ public class CharController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "GND" && collision.gameObject.tag == "MovingPlatform")
+        if (collision.gameObject.tag == "GND" || collision.gameObject.tag == "MovingPlatform")
         {
             isGrounded = true;
         }
@@ -141,7 +141,7 @@ public class CharController : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "GND" && collision.gameObject.tag == "MovingPlatform")
+        if (collision.gameObject.tag == "GND" || collision.gameObject.tag == "MovingPlatform")
         {
             isGrounded = true;
         }
@@ -149,7 +149,7 @@ public class CharController : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "GND" && collision.gameObject.tag == "MovingPlatform")
+        if (collision.gameObject.tag == "GND" || collision.gameObject.tag == "MovingPlatform")
         {
             isGrounded = false;
         }
