@@ -76,20 +76,17 @@ public class CharController : MonoBehaviour
         if (!stunned)
         {
             Movement();
-            if (!isGrounded)
+            if (!isGrounded && rb.velocity.y < 0)
             {
-                if (rb.velocity.y < 0)
+                if (!aSrc.isPlaying)
                 {
-                    if (!aSrc.isPlaying)
-                    {
-                        aSrc.clip = jetpack;
-                        aSrc.Play();
-                    }
-                    anim.SetBool("Caduta", true);
-                    anim.SetBool("Salto", false);
-                    anim.SetBool("Walk", false);
-                    rb.gravityScale = gravityDw;
+                    aSrc.clip = jetpack;
+                    aSrc.Play();
                 }
+                anim.SetBool("Caduta", true);
+                anim.SetBool("Salto", false);
+                anim.SetBool("Walk", false);
+                rb.gravityScale = gravityDw;
             }
         }
         else

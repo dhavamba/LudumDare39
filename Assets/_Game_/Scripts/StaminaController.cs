@@ -15,7 +15,12 @@ public class StaminaController : Singleton<StaminaController>
     private Slider slider;
 
     private float stamina;
+<<<<<<< HEAD
     public bool isAddStamina = false; //Devo ricaricare stamina?
+=======
+    private bool isAddStamina = false; //Devo ricaricare stamina?
+    private bool isDeath;
+>>>>>>> 62dfc14c339ecdc50c4af0f600b70e4918beaa5e
 
     CheckPointManager checkPointManager;
     
@@ -43,12 +48,16 @@ public class StaminaController : Singleton<StaminaController>
         stamina = Mathf.Clamp(stamina, 0, MAX_STAMINA);
         slider.value = stamina.ChangeRange(MAX_STAMINA, 1);
 
-        if (stamina == 0)
+        if (stamina == 0 && !isDeath)
         {
+            isDeath = true;
             //Respawno nell'ultimo checkpoint
-            Respawn();
+            SettingCamera.Instance().ExitFade();
+            Invoke("Respawn", 1f);
         }
     }
+
+
 
     public void setStamina(bool value)//Se passo true ricarico, se passo false scarico
     {
@@ -67,5 +76,7 @@ public class StaminaController : Singleton<StaminaController>
         slider.value = stamina.ChangeRange(MAX_STAMINA, 1);
         stamina = MAX_STAMINA;
         shadow.ResetShadow();
+        SettingCamera.Instance().EnterFade();
+        isDeath = false;
     }
 }
