@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StaminaController : MonoBehaviour
+public class StaminaController : Singleton<StaminaController>
 { 
     private float MAX_STAMINA;
     [SerializeField] [Range(0,1)]
@@ -62,7 +62,6 @@ public class StaminaController : MonoBehaviour
 
     public void Respawn()
     {
-        
         this.transform.position = checkPointManager.getCheckPoint().position;
         stamina = MAX_STAMINA;
         slider.value = stamina.ChangeRange(MAX_STAMINA, 1);
