@@ -21,7 +21,7 @@ public class CharController : MonoBehaviour
 
     private float speed;
     private bool isGrounded;
-    private bool stunned;
+    private bool stunned,slowed;
 
     private float timer;
 
@@ -35,7 +35,7 @@ public class CharController : MonoBehaviour
 
     private Animator anim;
 
-    public AudioClip passi, jetpack;
+    public AudioClip passi, jetpack, mud;
 
     private void Awake()
     {
@@ -59,6 +59,7 @@ public class CharController : MonoBehaviour
             rb.gravityScale = gravity;
             if (GetInputJump())
             {
+                aSrc.Stop();
                 rb.gravityScale = gravityUp;
                 Jump();
             }
@@ -77,13 +78,16 @@ public class CharController : MonoBehaviour
             Movement();
             if (!isGrounded)
             {
-                if (rb.velocity.y <= 0)
+                if (rb.velocity.y < 0)
                 {
+                    if (!aSrc.isPlaying)
+                    {
+                        aSrc.clip = jetpack;
+                        aSrc.Play();
+                    }
                     anim.SetBool("Caduta", true);
                     anim.SetBool("Salto", false);
                     anim.SetBool("Walk", false);
-                    aSrc.clip = jetpack;
-                    aSrc.Play();
                     rb.gravityScale = gravityDw;
                 }
             }
@@ -143,7 +147,10 @@ public class CharController : MonoBehaviour
             anim.SetBool("Caduta", false);
             anim.SetBool("Salto", false);
             anim.SetBool("Walk", true);
-            aSrc.clip = passi;
+            if (!slowed)
+                aSrc.clip = passi;
+            else
+                aSrc.clip = mud;
             aSrc.Play();
         }
         if(isGrounded && input == 0)
@@ -171,6 +178,7 @@ public class CharController : MonoBehaviour
     {
         if (!stunned)
         {
+            
             anim.SetBool("Caduta", false);
             anim.SetBool("Salto", true);
             anim.SetBool("Walk", false);
@@ -180,7 +188,9 @@ public class CharController : MonoBehaviour
 
     public void Slow()
     {
-        speed = stdspeed / 2;  
+        speed = stdspeed / 2;
+        aSrc.Stop();
+        slowed = true;
     }
 
     public void Stun()
@@ -192,6 +202,8 @@ public class CharController : MonoBehaviour
 
     public void ResetSpeed()
     {
+        aSrc.Stop();
+        slowed = false;
         speed = stdspeed;
     }
 }
