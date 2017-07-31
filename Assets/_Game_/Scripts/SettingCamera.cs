@@ -20,6 +20,16 @@ public class SettingCamera : Singleton<SettingCamera>
 	}
 
 
+    public void EnterFade()
+    {
+        GetComponent<ProCamera2DTransitionsFX>().TransitionEnter();
+    }
+
+    public void ExitFade()
+    {
+        GetComponent<ProCamera2DTransitionsFX>().TransitionExit();
+    }
+
     public void AddProfile()
     {
         GetComponent<PostProcessingBehaviour>().profile = profileAdd;
