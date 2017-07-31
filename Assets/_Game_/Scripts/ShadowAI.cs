@@ -69,15 +69,23 @@ public class ShadowAI : MonoBehaviour {
             aSrcViolin.Stop();
         }
          
-        if (!aSrcVoice.isPlaying)
-        { 
-            timer -= Time.deltaTime;
-            if (timer < 0)
+        if(stmController.getStamina() <= 0)
+        {
+            aSrcVoice.clip = voices[4];
+        }
+
+        if (!stmController.isAddStamina)
+        {
+            if (!aSrcVoice.isPlaying)
             {
-                int x = Random.Range(0, 4);
-                aSrcVoice.clip = voices[x];
-                aSrcVoice.Play();
-                timer = Random.Range(0, 11);
+                timer -= Time.deltaTime;
+                if (timer < 0)
+                {
+                    int x = Random.Range(0, 4);
+                    aSrcVoice.clip = voices[x];
+                    aSrcVoice.Play();
+                    timer = Random.Range(0, 11);
+                }
             }
         }
 

@@ -15,7 +15,7 @@ public class StaminaController : Singleton<StaminaController>
     private Slider slider;
 
     private float stamina;
-    private bool isAddStamina = false; //Devo ricaricare stamina?
+    public bool isAddStamina = false; //Devo ricaricare stamina?
 
     CheckPointManager checkPointManager;
     
