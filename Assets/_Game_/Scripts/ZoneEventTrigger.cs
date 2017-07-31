@@ -14,10 +14,12 @@ public class ZoneEventTrigger : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other)
     {
         stmController.setStamina(true);
+        SettingCamera.Instance().RemoveProfile();
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
         stmController.setStamina(false);
+        SettingCamera.Instance().AddProfile();
     }
 }
