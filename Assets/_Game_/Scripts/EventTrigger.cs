@@ -29,13 +29,20 @@ public class EventTrigger : MonoBehaviour {
         manager = GameObject.FindGameObjectWithTag("EventManager").GetComponent<EventManager>();
     }
 
+    bool GetInputUse()
+    {
+        return InputComand.Instance<InputComand>().Use();
+    }
+
     void FixedUpdate()
     {
         if(timeToRemaing<=0)
         {
             isPressed = false;
         }
-        if(!isPressed && isOnTrigger && Input.GetKeyDown(KeyCode.E) && interagibile)
+        Debug.Log(GetInputUse());
+
+        if(!isPressed && isOnTrigger && GetInputUse() && interagibile)
         {
             manager.runEvent(evento.ToString(), objectToActivate);
             isPressed = true;
