@@ -54,7 +54,7 @@ public class CharController : MonoBehaviour
 
     private bool GetInputJump()
     {
-        return InputComand.Instance<InputComand>().Jump();
+        return Input.GetButtonDown("Jump");
     }
 
     private void Update()
@@ -68,11 +68,6 @@ public class CharController : MonoBehaviour
                 rb.gravityScale = gravityUp;
                 Jump();
             }
-            /*
-            if (Input.GetAxis("Vertical") > 0)
-            {
-            }
-            */
         }
     }
 
@@ -134,9 +129,6 @@ public class CharController : MonoBehaviour
             {
                 transform.parent = collision.transform.GetChild(0).transform;
             }
-            /*var emptyObject = new GameObject();
-            emptyObject.transform.parent = collision.transform;
-            transform.parent = emptyObject.transform;*/
         }
     }
 
@@ -163,8 +155,7 @@ public class CharController : MonoBehaviour
 
     private float GetInputMovement()
     {
-        return InputComand.Instance<InputComand>().Movement();
-        //return Input.GetAxis("Horizontal");
+        return Input.GetAxis("Horizontal");
     }
 
     void Movement()

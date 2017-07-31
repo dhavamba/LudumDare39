@@ -2,65 +2,53 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventTrigger : MonoBehaviour {
+public class EventTrigger : MonoBehaviour
+{
+    [SerializeField]
+    private bool state;
+    [SerializeField]
+    private GameObject[] events;
 
-    //public typesOfEvents typeOfEvent;
-    EventManager manager;
-    public GameObject objectToActivate;
-    public bool interagibile = false;
+    private bool isOnTrigger;
 
-    public enum TypesOfEvent
+    private void Update()
     {
-        Porta, OggettoFantasma
-    };
+        if (isOnTrigger && GetInputUse())
+        {
+            foreach (GameObject obj in events)
+            {
+                if (!state)
+                {
+                    obj.GetComponent<IEvent>().Active();
+                }
+                else
+                {
+                    obj.GetComponent<IEvent>().Disactive();
+                }
+            }
 
-    public TypesOfEvent evento;
+            if (!state)
+            {
+                GetComponent<SpriteRenderer>().color = Color.green;
+            }
+            else
+            {
+                GetComponent<SpriteRenderer>().color = Color.blue;
+            }
 
-    bool isOnTrigger = false;
-    bool isPressed = false;
-    bool isActivated = false;
-    
+            state = !state;
+        }
 
-    float timer = .5f;
-    float timeToRemaing;
-
-    void Start()
-    {
-        manager = GameObject.FindGameObjectWithTag("EventManager").GetComponent<EventManager>();
     }
 
     bool GetInputUse()
     {
-        return InputComand.Instance<InputComand>().Use();
-    }
-
-    void FixedUpdate()
-    {
-        if(timeToRemaing<=0)
-        {
-            isPressed = false;
-        }
-        Debug.Log(GetInputUse());
-
-        if(!isPressed && isOnTrigger && GetInputUse() && interagibile)
-        {
-            manager.runEvent(evento.ToString(), objectToActivate);
-            isPressed = true;
-            timeToRemaing = timer;
-        }
-
-        if(!interagibile && isOnTrigger && !isActivated)
-        {
-            manager.runEvent(evento.ToString(), objectToActivate);
-            isActivated = true;
-        }
-
-        timeToRemaing -= Time.fixedDeltaTime;
+        return Input.GetButtonDown("Use");
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             isOnTrigger = true;
         }
@@ -71,7 +59,6 @@ public class EventTrigger : MonoBehaviour {
         if (other.CompareTag("Player"))
         {
             isOnTrigger = false;
-            isActivated = false;
         }
     }
 

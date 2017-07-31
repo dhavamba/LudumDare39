@@ -7,10 +7,11 @@ using UnityEngine.PostProcessing;
 public class SettingCamera : Singleton<SettingCamera>
 {
 
-    public PostProcessingProfile profile;
+    public PostProcessingProfile profileAdd;
+    public PostProcessingProfile profileRemove;
 
-	// Use this for initialization
-	void Awake ()
+    // Use this for initialization
+    void Awake ()
     {
         ProCamera2D cam = GetComponent<ProCamera2D>();
         Transform pl = GameObject.FindGameObjectWithTag("Player").transform;
@@ -21,12 +22,12 @@ public class SettingCamera : Singleton<SettingCamera>
 
     public void AddProfile()
     {
-        GetComponent<PostProcessingBehaviour>().profile = profile;
+        GetComponent<PostProcessingBehaviour>().profile = profileAdd;
     }
 
     public void RemoveProfile()
     {
-        GetComponent<PostProcessingBehaviour>().profile = null;
+        GetComponent<PostProcessingBehaviour>().profile = profileRemove;
     }
 
 

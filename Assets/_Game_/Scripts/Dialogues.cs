@@ -9,6 +9,12 @@ public class Dialogues : Singleton<Dialogues>
     [SerializeField] [Range(0, 5)]
     private float timeForDialog;
 
+    [SerializeField]
+    private List<Dialogue> Startdialogues;
+
+    [SerializeField]
+    private Dialogue piantinaElettrica;
+
     private List<Dialogue> actives;
     private bool active;
 
@@ -20,13 +26,45 @@ public class Dialogues : Singleton<Dialogues>
         {
             d.Init();
         }
-	}
+        foreach (Dialogue d in Startdialogues)
+        {
+            d.Init();
+        }
+    }
+
+    private void Start()
+    {
+        //AddDialogue(Startdialogues[0]);
+        //AddDialogue(Startdialogues[1]);
+    }
+
+    public void Stop()
+    {
+        if (actives[0] != null)
+        {
+            actives[0].Reset();
+            actives.RemoveAt(0);
+        }
+
+        CancelInvoke();
+        UIDialogue.Instance().Clear();
+        active = false;
+    }
 
     public void AddDialogue()
     {
-        int n = Random.Range(0, dialogues.Count);
+        int n = Random.Range(0, dialogues.Count - 1);
         actives.Add(dialogues[n]);
-        dialogues.RemoveAt(n);
+        if (!active)
+        {
+            active = true;
+            RealDialogue();
+        }
+    }
+
+    public void AddDialogue(Dialogue d)
+    {
+        actives.Add(d);
         if (!active)
         {
             active = true;
@@ -41,9 +79,10 @@ public class Dialogues : Singleton<Dialogues>
         if (!d.Next())
         {
             actives.RemoveAt(0);
+            d.Reset();
             Invoke("Clear", timeForDialog);
         }
-        if (actives.Count > 0)
+        else if (actives.Count > 0)
         {
             Invoke("RealDialogue", timeForDialog);
         }
@@ -54,7 +93,7 @@ public class Dialogues : Singleton<Dialogues>
         UIDialogue.Instance().Clear();
         if (actives.Count > 0)
         {
-            RealDialogue();
+            Invoke("RealDialogue", 4f);
         }
         else
         {

@@ -32,9 +32,12 @@ namespace UITemplate
         private Pause pause;
         private ChangeSelectedEvent selectEvent;
 
+        private GameObject BG;
+
         void Awake()
         {
             StartOptions[] duplicate = GameObject.FindObjectsOfType<StartOptions>();
+            BG = GameObject.Find("BG");
 
             if (duplicate.Length > 1)
             {
@@ -65,6 +68,7 @@ namespace UITemplate
         public void ReturnMenu()
         {
             SceneManager.LoadScene(0);
+            BG.SetActive(true);
             pause.UnPause();
             inMainMenu = true;
             showPanels.ShowMenu();
@@ -104,6 +108,7 @@ namespace UITemplate
             //If changeScenes is true, start fading and change scenes halfway through animation when screen is blocked by FadeImage
             if (changeScenes)
             {
+                BG.SetActive(false);
                 //Use invoke to delay calling of LoadDelayed by half the length of fadeColorAnimationClip
                 Invoke("LoadDelayed", fadeColorAnimationClip.length * .5f);
 

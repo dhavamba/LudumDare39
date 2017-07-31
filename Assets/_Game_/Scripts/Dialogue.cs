@@ -28,43 +28,9 @@ public class Dialogue
         dialogs = new List<string>();
         string[] strings = dialog.Split(new string[] { "/" }, StringSplitOptions.None);
         strings = new List<string>(strings).GetRange(1, strings.Length - 1).ToArray();
-        List<string> newStrings = new List<string>();
-
-        foreach (string s in strings)
-        {
-            if (s.Length < max)
-            {
-                newStrings.Add(s);
-                aux = s;
-            }
-            else
-            {
-                List<string> divides = new List<string>();
-                int count = 0;
-                int init = 0;
-                for (int d = 0; d < s.Length; d++)
-                {
-                    count++;
-                    if (count > max && ( s[d-1] == ' ' || s[d-1] == '.' || d == s.Length))
-                    {
-                        divides.Add(s.Substring(init, d - init));
-                        init = d;
-                        count = 0;
-                    }
-                }
-
-                newStrings.Add(divides[0]);
-
-                for (int d = 1; d < divides.Count; d++)
-                {
-                    newStrings.Add(aux);
-                    newStrings.Add(divides[d]);
-                }
-            }
-        }
 
         int i = 0;
-        foreach (string s in newStrings)
+        foreach (string s in strings)
         {
             if (i % 2 == 0)
             {
@@ -77,7 +43,7 @@ public class Dialogue
             i++;
         }
 
-        numberLine = (int)(newStrings.Count / 2);
+        numberLine = (int)(strings.Length / 2);
     }
 
     public bool Next()
@@ -93,7 +59,7 @@ public class Dialogue
 
     public FacesEnum GetPerson()
     {
-        if (people[index] == "radio")
+        if (people[index] == "rad")
         {
             return FacesEnum.Radio;
         }
