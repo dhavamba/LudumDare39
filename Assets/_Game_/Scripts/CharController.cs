@@ -122,14 +122,17 @@ public class CharController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "GND")
+        if (collision.gameObject.tag == "GND" && collision.gameObject.tag == "MovingPlatform")
         {
             isGrounded = true;
         }
 
         if(collision.gameObject.tag == "MovingPlatform")
         {
-            transform.parent = collision.transform.GetChild(0).transform;
+            if(transform.position.y > collision.transform.position.y + 1)
+            {
+                transform.parent = collision.transform.GetChild(0).transform;
+            }
             /*var emptyObject = new GameObject();
             emptyObject.transform.parent = collision.transform;
             transform.parent = emptyObject.transform;*/
@@ -138,7 +141,7 @@ public class CharController : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "GND")
+        if (collision.gameObject.tag == "GND" && collision.gameObject.tag == "MovingPlatform")
         {
             isGrounded = true;
         }
@@ -146,7 +149,7 @@ public class CharController : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "GND")
+        if (collision.gameObject.tag == "GND" && collision.gameObject.tag == "MovingPlatform")
         {
             isGrounded = false;
         }
@@ -224,7 +227,6 @@ public class CharController : MonoBehaviour
 
     public void Stun()
     {
-        transform.Translate(-1f, 0, 0);
         anim.SetBool("Stun", true);
         stunned = true;
     }
