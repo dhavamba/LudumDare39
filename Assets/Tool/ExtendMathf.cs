@@ -40,7 +40,12 @@ public static class ExtendMathf
         return (float)(newRange.x + ((value - originalRange.x) * scale));
     }
 
-    public static int AddInCircleRange(this int value, int max)
+    public static float ChangeRange(this float value, float maxOld, float maxNew)
+    {
+        return ChangeRange(value, new Vector2(0, maxOld), new Vector2(0, maxNew));
+    }
+
+    public static float AddInCircleRange(this int value, int max)
     {
         return AddInCirlceRange(value, new UnityEngine.Vector2(0, max));
     }

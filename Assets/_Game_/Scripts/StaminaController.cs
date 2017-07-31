@@ -1,19 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StaminaController : MonoBehaviour
 { 
-    public float MAX_STAMINA;
-    public float addStaminaSpeed;
-    public float subStaminaSpeed;
-    ShadowAI shadow;
+    [SerializeField]
+    private float MAX_STAMINA;
+    [SerializeField] [Range(0,1)]
+    private float addStaminaSpeed;
+    [SerializeField] [Range(0,1)]
+    private float subStaminaSpeed;
 
-    float timer = 3;
-    float timeToRemaining;
+    private ShadowAI shadow;
+    private Slider slider;
+    private float timeToRemaining;
 
-    float stamina;
-    bool isAddStamina = false; //Devo ricaricare stamina?
+    private float stamina;
+    private bool isAddStamina = false; //Devo ricaricare stamina?
 
     CheckPointManager checkPointManager;
     
@@ -22,44 +26,29 @@ public class StaminaController : MonoBehaviour
         stamina = MAX_STAMINA;
         checkPointManager = GameObject.FindGameObjectWithTag("CheckPointManager").GetComponent<CheckPointManager>();
         shadow = GameObject.FindGameObjectWithTag("Shadow").GetComponent<ShadowAI>();
+        slider = GameObject.FindObjectOfType<Slider>();
+        timeToRemaining = MAX_STAMINA;
     }
 
     void Update()
     {
-        if (timeToRemaining <= 0)
+        if (!isAddStamina)
         {
-            if (!isAddStamina && stamina > 0)
-            {
-                if (stamina > 0)
-                {
-                    stamina -= subStaminaSpeed;
-                    Debug.Log("Perdo stamina...  Stamina attuale: " + stamina);
-                }
-                else
-                {
-                    //Respawno nell'ultimo checkpoint
-                    stamina = 0;
-                }
-            }
-            if(isAddStamina && stamina < MAX_STAMINA)
-            {
-                stamina += addStaminaSpeed;
-
-                if(stamina>MAX_STAMINA)
-                {
-                    stamina = MAX_STAMINA;
-                }
-
-                Debug.Log("Ricarico stamina...  Stamina attuale: " + stamina);
-            }
-            timeToRemaining = timer;
+            timeToRemaining -= Time.deltaTime * subStaminaSpeed * 50;
+        }
+        else
+        {
+            timeToRemaining += Time.deltaTime * addStaminaSpeed * 50;
         }
 
-        timeToRemaining -= Time.deltaTime;
-        if (stamina <= 0)
+        timeToRemaining = Mathf.Clamp(timeToRemaining, 0, MAX_STAMINA);
+        stamina = timeToRemaining;
+        slider.value = stamina.ChangeRange(MAX_STAMINA, 1);
+
+        if (stamina == 0)
         {
             //Respawno nell'ultimo checkpoint
-           // Respawn();
+            Respawn();
         }
     }
 
@@ -78,7 +67,8 @@ public class StaminaController : MonoBehaviour
         
         this.transform.position = checkPointManager.getCheckPoint().position;
         stamina = MAX_STAMINA;
-        timeToRemaining = timer;
+        slider.value = stamina.ChangeRange(MAX_STAMINA, 1);
+        timeToRemaining = MAX_STAMINA;
         shadow.ResetShadow();
     }
 }
