@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class StaminaController : MonoBehaviour
 { 
-    [SerializeField]
     private float MAX_STAMINA;
     [SerializeField] [Range(0,1)]
     private float addStaminaSpeed;
@@ -14,7 +13,6 @@ public class StaminaController : MonoBehaviour
 
     private ShadowAI shadow;
     private Slider slider;
-    private float timeToRemaining;
 
     private float stamina;
     private bool isAddStamina = false; //Devo ricaricare stamina?
@@ -23,26 +21,26 @@ public class StaminaController : MonoBehaviour
     
     void Start()
     {
+        MAX_STAMINA = 100;
         stamina = MAX_STAMINA;
         checkPointManager = GameObject.FindGameObjectWithTag("CheckPointManager").GetComponent<CheckPointManager>();
         shadow = GameObject.FindGameObjectWithTag("Shadow").GetComponent<ShadowAI>();
         slider = GameObject.FindObjectOfType<Slider>();
-        timeToRemaining = MAX_STAMINA;
+        stamina = MAX_STAMINA;
     }
 
     void Update()
     {
         if (!isAddStamina)
         {
-            timeToRemaining -= Time.deltaTime * subStaminaSpeed * 50;
+            stamina -= Time.deltaTime * subStaminaSpeed * 50;
         }
         else
         {
-            timeToRemaining += Time.deltaTime * addStaminaSpeed * 50;
+            stamina += Time.deltaTime * addStaminaSpeed * 50;
         }
 
-        timeToRemaining = Mathf.Clamp(timeToRemaining, 0, MAX_STAMINA);
-        stamina = timeToRemaining;
+        stamina = Mathf.Clamp(stamina, 0, MAX_STAMINA);
         slider.value = stamina.ChangeRange(MAX_STAMINA, 1);
 
         if (stamina == 0)
@@ -68,7 +66,7 @@ public class StaminaController : MonoBehaviour
         this.transform.position = checkPointManager.getCheckPoint().position;
         stamina = MAX_STAMINA;
         slider.value = stamina.ChangeRange(MAX_STAMINA, 1);
-        timeToRemaining = MAX_STAMINA;
+        stamina = MAX_STAMINA;
         shadow.ResetShadow();
     }
 }

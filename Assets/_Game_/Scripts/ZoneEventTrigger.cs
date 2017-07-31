@@ -5,22 +5,19 @@ using UnityEngine;
 public class ZoneEventTrigger : MonoBehaviour {
 
     StaminaController stmController;
-    public bool isRescueZone = false;
 
     void Start()
     {
         stmController = GameObject.FindGameObjectWithTag("Player").GetComponent<StaminaController>();
     }
+
     void OnTriggerEnter2D(Collider2D other)
     {
+        stmController.setStamina(true);
+    }
 
-        if (other.CompareTag("Player") && !isRescueZone)
-        {
-            stmController.setStamina(true);
-        }
-        else if (other.CompareTag("Player") && isRescueZone)
-        {
-            stmController.setStamina(false);
-        }
+    void OnTriggerExit2D(Collider2D other)
+    {
+        stmController.setStamina(false);
     }
 }
