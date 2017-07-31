@@ -59,12 +59,12 @@ public class GhostObject : MonoBehaviour {
     public void Active()
     {
         GetComponent<SpriteRenderer>().enabled = true;
-        GetComponent<PolygonCollider2D>().enabled = true;
+        GetComponent<Collider2D>().enabled = true;
     }
 
     public void Deactive()
     {
         GetComponent<SpriteRenderer>().enabled = false;
-        GetComponent<PolygonCollider2D>().enabled = false;
+        GetComponent<Collider2D>().enabled = false;
     }
 }
