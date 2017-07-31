@@ -39,7 +39,7 @@ public class ShadowAI : MonoBehaviour {
     void Update()
     {
         //myTransform.Translate(positionToReach * Time.delta);
-        float step = speed * Time.deltaTime;
+        float step = speed * Time.deltaTime * 100;
         myTransform.position = Vector3.MoveTowards(myTransform.position, positionToReach, step);
         
         if (stmController.getStamina() < 60)
