@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Com.LuisPedroFonseca.ProCamera2D;
+using UnityEngine.PostProcessing;
 
-public class SettingCamera : MonoBehaviour {
+public class SettingCamera : Singleton<SettingCamera>
+{
+
+    public PostProcessingProfile profile;
 
 	// Use this for initialization
 	void Awake ()
@@ -13,5 +17,19 @@ public class SettingCamera : MonoBehaviour {
 
         cam.AddCameraTarget(pl);
 	}
+
+
+    public void AddProfile()
+    {
+        GetComponent<PostProcessingBehaviour>().profile = profile;
+    }
+
+    public void RemoveProfile()
+    {
+        GetComponent<PostProcessingBehaviour>().profile = null;
+    }
+
+
+
 
 }
