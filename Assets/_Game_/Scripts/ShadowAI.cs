@@ -39,13 +39,21 @@ public class ShadowAI : MonoBehaviour {
     void Update()
     {
         //myTransform.Translate(positionToReach * Time.delta);
-        float step = speed * Time.deltaTime * 100;
-        myTransform.position = Vector3.MoveTowards(myTransform.position, positionToReach, step);
+        //float step = speed * Time.deltaTime * 100;
+        //myTransform.position = Vector3.MoveTowards(myTransform.position, positionToReach, step);
         
         if (stmController.getStamina() < 60)
         {
+            float step = speed * Time.deltaTime * 100;
+            myTransform.position = Vector3.MoveTowards(myTransform.position, positionToReach, step);
             RefreshOffset();
             RefreshLocation();
+        }
+        else
+        {
+            float step = speed * Time.deltaTime * 50;
+            myTransform.position = Vector3.MoveTowards(myTransform.position, positionToReach, step);
+            ResetShadow();
         }
 
         if(stmController.getStamina() < 10)
@@ -96,7 +104,7 @@ public class ShadowAI : MonoBehaviour {
 
     public void ResetShadow()
     {
-        positionToReach = new Vector2(playerPosition.position.x - 10, playerPosition.position.y);
+        positionToReach = new Vector2(playerPosition.position.x - 20, playerPosition.position.y);
         
     }
 }
