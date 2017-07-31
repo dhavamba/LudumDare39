@@ -278,6 +278,72 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ddc0b964bbc47da4e94b28946f8c1699, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &65799627
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 65799630}
+  - component: {fileID: 65799629}
+  - component: {fileID: 65799628}
+  m_Layer: 0
+  m_Name: end
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &65799628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 65799627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f64cd567d17a90340985ad6026d04b83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &65799629
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 65799627}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 3.041668, y: 2.5709248}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 15.194359, y: 12.514805}
+  m_EdgeRadius: 0
+--- !u!4 &65799630
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 65799627}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 107.5, y: -44.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 27
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &145917498
 Prefab:
   m_ObjectHideFlags: 0
@@ -1101,11 +1167,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4839029905227442, guid: 95cdd28292436494298924951fe73355, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 106
+      value: -3.2
       objectReference: {fileID: 0}
     - target: {fileID: 4839029905227442, guid: 95cdd28292436494298924951fe73355, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -17.3
+      value: 6.6
       objectReference: {fileID: 0}
     - target: {fileID: 4839029905227442, guid: 95cdd28292436494298924951fe73355, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1406,6 +1472,39 @@ Transform:
   m_PrefabParentObject: {fileID: 4202068423447120, guid: ac203fe9875a47643b864700c6ca9b96,
     type: 2}
   m_PrefabInternal: {fileID: 1799674204}
+--- !u!114 &722023946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 722023936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1eca57db7d394266ae024997acf4456, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ProCamera2D: {fileID: 722023940}
+  TransitionShaderEnter: 0
+  DurationEnter: 0.5
+  DelayEnter: 0
+  EaseTypeEnter: 1
+  BackgroundColorEnter: {r: 0, g: 0, b: 0, a: 1}
+  SideEnter: 0
+  DirectionEnter: 0
+  BlindsEnter: 16
+  TextureEnter: {fileID: 0}
+  TextureSmoothingEnter: 0.2
+  TransitionShaderExit: 0
+  DurationExit: 0.5
+  DelayExit: 0
+  EaseTypeExit: 1
+  BackgroundColorExit: {r: 0, g: 0, b: 0, a: 1}
+  SideExit: 0
+  DirectionExit: 0
+  BlindsExit: 16
+  TextureExit: {fileID: 0}
+  TextureSmoothingExit: 0.2
+  StartSceneOnEnterState: 0
 --- !u!1001 &728910880
 Prefab:
   m_ObjectHideFlags: 0
@@ -1963,6 +2062,26 @@ Prefab:
       propertyPath: ps.Array.data[3]
       value: 
       objectReference: {fileID: 8300000, guid: 6d1c123db3137c942872ff7564b2b532, type: 3}
+    - target: {fileID: 114705025202194654, guid: 9823e4a84d780ae42a6e3387b98f7ea2,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114705025202194654, guid: 9823e4a84d780ae42a6e3387b98f7ea2,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114705025202194654, guid: 9823e4a84d780ae42a6e3387b98f7ea2,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114250322485775096, guid: 9823e4a84d780ae42a6e3387b98f7ea2,
+        type: 2}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9823e4a84d780ae42a6e3387b98f7ea2, type: 2}
   m_IsPrefabParent: 0
@@ -4973,7 +5092,7 @@ Prefab:
     - target: {fileID: 20264335937552152, guid: ac203fe9875a47643b864700c6ca9b96,
         type: 2}
       propertyPath: orthographic
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114546341284368634, guid: ac203fe9875a47643b864700c6ca9b96,
         type: 2}
