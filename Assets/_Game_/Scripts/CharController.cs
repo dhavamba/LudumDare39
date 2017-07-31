@@ -113,6 +113,14 @@ public class CharController : MonoBehaviour
         {
             isGrounded = true;
         }
+
+        if(collision.gameObject.tag == "MovingPlatform")
+        {
+            transform.parent = collision.transform.GetChild(0).transform;
+            /*var emptyObject = new GameObject();
+            emptyObject.transform.parent = collision.transform;
+            transform.parent = emptyObject.transform;*/
+        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -128,6 +136,11 @@ public class CharController : MonoBehaviour
         if (collision.gameObject.tag == "GND")
         {
             isGrounded = false;
+        }
+
+        if (collision.gameObject.tag == "MovingPlatform")
+        {
+            transform.parent = null;
         }
     }
 
