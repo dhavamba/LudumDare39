@@ -124,6 +124,7 @@ public class CharController : MonoBehaviour
     {
         if (collision.gameObject.tag == "GND" || collision.gameObject.tag == "MovingPlatform")
         {
+            aSrc.Stop();
             isGrounded = true;
         }
 

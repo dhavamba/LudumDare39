@@ -6816,12 +6816,53 @@ Prefab:
     - target: {fileID: 60698928074630270, guid: 216b3b3db7004da43927e1fd9bdea2a2,
         type: 2}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 1.51
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 60698928074630270, guid: 216b3b3db7004da43927e1fd9bdea2a2,
         type: 2}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.67
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212097929405718830, guid: 216b3b3db7004da43927e1fd9bdea2a2,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 025b845b95a22f74b9083b97de206a07,
+        type: 3}
+    - target: {fileID: 60698928074630270, guid: 216b3b3db7004da43927e1fd9bdea2a2,
+        type: 2}
+      propertyPath: m_AutoTiling
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 60698928074630270, guid: 216b3b3db7004da43927e1fd9bdea2a2,
+        type: 2}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 60698928074630270, guid: 216b3b3db7004da43927e1fd9bdea2a2,
+        type: 2}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 60698928074630270, guid: 216b3b3db7004da43927e1fd9bdea2a2,
+        type: 2}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 60698928074630270, guid: 216b3b3db7004da43927e1fd9bdea2a2,
+        type: 2}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].y
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 60698928074630270, guid: 216b3b3db7004da43927e1fd9bdea2a2,
+        type: 2}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 60698928074630270, guid: 216b3b3db7004da43927e1fd9bdea2a2,
+        type: 2}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].y
+      value: -0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 216b3b3db7004da43927e1fd9bdea2a2, type: 2}
