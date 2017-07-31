@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 50302329536345270}
   - component: {fileID: 114067976698054032}
   - component: {fileID: 82387274595603284}
+  - component: {fileID: 95001048463382070}
   m_Layer: 0
   m_Name: Spina
   m_TagString: Untagged
@@ -38,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1742056983087858}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.0571542, y: 4.7504606, z: 0}
+  m_LocalPosition: {x: 1.14, y: 5.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -80,7 +81,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -88,9 +89,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.5}
-      - {x: 0.43301272, y: -0.24999994}
-      - {x: -0.4330127, y: -0.25000003}
+    - - {x: -0.53540885, y: 0.84266186}
+      - {x: 0.59620583, y: 0.39865732}
+      - {x: 0.44372094, y: -0.9888649}
+      - {x: -0.43301272, y: -0.9567399}
 --- !u!82 &82387274595603284
 AudioSource:
   m_ObjectHideFlags: 1
@@ -171,6 +173,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!95 &95001048463382070
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1742056983087858}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 328c2b079088bec46b59deaa9ba94494, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114067976698054032
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -215,7 +234,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: fe2a6ce3408306a4dbffd45c122e1c6b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fd6369b454b71c5439d20b92f975923c, type: 3}
   m_Color: {r: 0, g: 0.5379819, b: 0.75735295, a: 1}
   m_FlipX: 0
   m_FlipY: 0
