@@ -49,7 +49,7 @@ public class CharController : MonoBehaviour
         timer = timeStunned * 10;
         aSrc = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
-        timerI = timeInvincible * 3;
+        timerI = timeInvincible * 10;
     }
 
     private bool GetInputJump()

@@ -40,7 +40,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1331529556918214}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.1, y: 1.31, z: 0}
+  m_LocalPosition: {x: -4.04, y: 6.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -202,8 +202,9 @@ MonoBehaviour:
   stdspeed: 0.5
   gravityUp: 1
   gravityDw: 0.2
-  timeStunned: 0.3
-  jumpForce: 0.3
+  timeStunned: 0.1
+  timeInvincible: 0.15
+  jumpForce: 0.45
   passi: {fileID: 8300000, guid: c3e72223c306a304ea45242fb20f23ac, type: 3}
   jetpack: {fileID: 8300000, guid: 59455037a3ec4744e8bc67633acdca2e, type: 3}
   mud: {fileID: 8300000, guid: 860f0117a2338494b811389eadbf609f, type: 3}
@@ -218,9 +219,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89525a06d46f3ad48a78f4c7f786027b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MAX_STAMINA: 100
   addStaminaSpeed: 1
-  subStaminaSpeed: 1
+  subStaminaSpeed: 0.2
 --- !u!212 &212264376365975112
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -261,5 +261,3 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
