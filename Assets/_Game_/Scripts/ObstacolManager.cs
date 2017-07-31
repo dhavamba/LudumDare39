@@ -32,6 +32,17 @@ public class ObstacolManager : MonoBehaviour {
                     collision.gameObject.GetComponent<CharController>().Slow();
                     break;
 
+                
+            }
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            switch(type)
+            {
                 case typeOfObstacles.Stun:
                     aSrc.Play();
                     collision.gameObject.GetComponent<CharController>().Stun();

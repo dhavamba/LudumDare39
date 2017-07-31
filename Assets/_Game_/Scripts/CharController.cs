@@ -18,12 +18,16 @@ public class CharController : MonoBehaviour
     private float gravityDw;
     [SerializeField] [Range(0, 1)]
     private float timeStunned;
+    [SerializeField]
+    [Range(0, 1)]
+    private float timeInvincible;
+
 
     private float speed;
     private bool isGrounded;
-    private bool stunned,slowed;
+    private bool stunned,slowed,invincibile;
 
-    private float timer;
+    private float timer,timerI;
 
     private float gravity;
     private Rigidbody2D rb;
@@ -45,6 +49,7 @@ public class CharController : MonoBehaviour
         timer = timeStunned * 10;
         aSrc = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
+        timerI = timeInvincible * 3;
     }
 
     private bool GetInputJump()
@@ -94,7 +99,14 @@ public class CharController : MonoBehaviour
         }
         else
         {
-            
+            if (invincibile)
+            {
+                timerI -= Time.fixedDeltaTime;
+                if (timerI <= 0)
+                {
+                    invincibile = false;
+                }
+            }
             Vector2 sp = new Vector2(0, rb.velocity.y);
             rb.velocity = sp;
             timer -= Time.fixedDeltaTime;
@@ -103,6 +115,7 @@ public class CharController : MonoBehaviour
                 stunned = false;
                 timer = timeStunned * 10;
                 anim.SetBool("Stun", false);
+                invincibile = true;
             }
         }
     }
@@ -201,9 +214,12 @@ public class CharController : MonoBehaviour
 
     public void Slow()
     {
-        speed = stdspeed / 2;
-        aSrc.Stop();
-        slowed = true;
+        if (!invincibile)
+        {
+            speed = stdspeed / 2;
+            aSrc.Stop();
+            slowed = true;
+        }
     }
 
     public void Stun()
